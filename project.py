@@ -83,7 +83,7 @@ job_role = st.text_input("Job Role Applied For")
 if st.button("🚀 Screen Resume"):
     resume_text = skills + " " + education + " " + certifications + " " + job_role
 
-    X = vectorizer.transform([resume_text])
+
     prediction = model.predict(X)[0]
     confidence = max(model.predict_proba(X)[0]) * 100
 
