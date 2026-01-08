@@ -11,7 +11,6 @@ import pandas as pd
 
 import os
 
-from sklearn.linear_model import LogisticRegression
 
 # ---------------- CONFIG ----------------
 st.set_page_config(
