@@ -86,7 +86,6 @@ if st.button("🚀 Screen Resume"):
 
   
 
-    st.markdown(f"## ✅ Decision: **{prediction}**")
     st.markdown(f"### 📊 Confidence Score: **{confidence:.2f}%**")
 
     if prediction == "Hire":
