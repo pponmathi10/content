@@ -68,7 +68,7 @@ st.set_page_config(
 st.title("📄 Intelligent Resume Screening System")
 st.subheader("Using NLP and Machine Learning")
 
-model, vectorizer = load_model()
+
 
 st.markdown("### 🔍 Enter Candidate Details")
 
