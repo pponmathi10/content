@@ -7,7 +7,8 @@ Original file is located at
     https://colab.research.google.com/drive/1GeafcE9qUlPpjzLQMRH8IOunRC9cEUAn
 """
 import streamlit as st
-from model import load_model
+from src.model import load_model
+
 
 st.set_page_config(
     page_title="Intelligent Resume Screening System",
