@@ -70,7 +70,6 @@ if st.button("Analyze & Rank"):
                 
                 st.success("Analysis Complete!")
                 st.table(results)
-            else:
-                st.error("Could not extract text from the uploaded PDFs.")
+          
     else:
         st.warning("Please provide both a Job Description and Resumes.")
