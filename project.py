@@ -7,7 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1GeafcE9qUlPpjzLQMRH8IOunRC9cEUAn
 """
 import streamlit as st
-from sklearn.metrics.pairwise import cosine_similarity
+
 import PyPDF2
 
 def extract_text_from_pdf(file):
