@@ -90,5 +90,4 @@ if st.button("🚀 Screen Resume"):
 
     
     
-    else:
-        st.error("Candidate does not meet the criteria ❌")
+    
