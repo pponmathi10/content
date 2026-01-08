@@ -56,11 +56,11 @@ def train_model():
 
 # ---------------- LOAD MODEL ----------------
 def load_model():
-    if not os.path.exists(MODEL_PATH) or not os.path.exists(VECTORIZER_PATH):
+    
         
 
     model = joblib.load(MODEL_PATH)
-    vectorizer = joblib.load(VECTORIZER_PATH)
+
     return model, vectorizer
 
 
