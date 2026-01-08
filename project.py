@@ -11,7 +11,7 @@ import pandas as pd
 
 import os
 
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegres
 
 MODEL_PATH = "model.pkl"
 VECTORIZER_PATH = "vectorizer.pkl"
