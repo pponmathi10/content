@@ -71,7 +71,7 @@ st.markdown("### 🔍 Enter Candidate Details")
 skills = st.text_input("Skills (comma separated)")
 education = st.selectbox(
     "Education",
-    ["B.Sc", "B.Tech", "MBA", "M.Sc", "PhD"]
+    ["B.E","B.Sc", "B.Tech", "MBA", "M.Sc", "PhD"]
 )
 certifications = st.text_input("Certifications")
 job_role = st.text_input("Job Role Applied For")
