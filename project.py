@@ -9,7 +9,6 @@ Original file is located at
 import streamlit as st
 import pandas as pd
 
-import PyPDF2
 import re
 
 # Page Configuration
