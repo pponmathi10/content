@@ -10,7 +10,7 @@ Original file is located at
 import pandas as pd
 
 import os
-from sklearn.feature_extraction.text import TfidfVectorizer
+
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 
