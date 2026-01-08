@@ -84,7 +84,7 @@ if st.button("🚀 Screen Resume"):
     resume_text = skills + " " + education + " " + certifications + " " + job_role
 
 
-    prediction = model.predict(X)[0]
+  
     confidence = max(model.predict_proba(X)[0]) * 100
 
     st.markdown(f"## ✅ Decision: **{prediction}**")
