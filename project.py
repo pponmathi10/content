@@ -8,7 +8,7 @@ Original file is located at
 """
 import streamlit as st
 import pandas as pd
-import joblib
+
 import os
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
