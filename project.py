@@ -85,7 +85,6 @@ if st.button("🚀 Screen Resume"):
 
 
   
-    confidence = max(model.predict_proba(X)[0]) * 100
 
     st.markdown(f"## ✅ Decision: **{prediction}**")
     st.markdown(f"### 📊 Confidence Score: **{confidence:.2f}%**")
