@@ -58,7 +58,7 @@ def load_model():
 
 import streamlit as st
 import pandas as pd
-from model import load_model
+
 
 st.set_page_config(
     page_title="Intelligent Resume Screening System",
