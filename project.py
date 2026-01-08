@@ -83,7 +83,7 @@ job_role = st.text_input("Job Role Applied For")
 if st.button("🚀 Screen Resume"):
     resume_text = skills + " " + education + " " + certifications + " " + job_role
 
-X = vectorizer.transform([resume_text])
+    X = vectorizer.transform([resume_text])
     prediction = model.predict(X)[0]
     confidence = max(model.predict_proba(X)[0]) * 100
 
@@ -94,6 +94,7 @@ X = vectorizer.transform([resume_text])
         st.success("Candidate is suitable for the role 🎯")
     else:
         st.error("Candidate does not meet the criteria ❌")
+
 
 
   
