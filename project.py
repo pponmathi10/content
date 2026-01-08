@@ -7,38 +7,94 @@ Original file is located at
     https://colab.research.google.com/drive/1GeafcE9qUlPpjzLQMRH8IOunRC9cEUAn
 """
 import streamlit as st
+import pandas as pd
+import joblib
+import os
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
 
+# ---------------- CONFIG ----------------
+st.set_page_config(
+    page_title="Intelligent Resume Screening System",
+    layout="centered"
+)
 
-def extract_text_from_pdf(file):
-    pdf_reader = PyPDF2.PdfReader(file)
-    text = ""
-    for page in pdf_reader.pages:
-        text += page.extract_text()
-    return text
+st.title("📄 Intelligent Resume Screening System")
+st.subheader("Using NLP and Machine Learning")
 
-st.title("Intelligent Resume Screener")
+DATA_PATH = "data/AI_Resume_Screening.csv"
+MODEL_PATH = "model.pkl"
+VECTORIZER_PATH = "vectorizer.pkl"
 
-# Input: Job Description
-jd_text = st.text_area("Paste the Job Description here:")
+# ---------------- TRAIN MODEL ----------------
+def train_model():
+    df = pd.read_csv(DATA_PATH)
 
-# Input: Resume Upload
-uploaded_files = st.file_uploader("Upload Resumes (PDF)", type=["pdf"], accept_multiple_files=True)
+    # Combine text columns
+    df["resume_text"] = (
+        df["Skills"].fillna("") + " " +
+        df["Education"].fillna("") + " " +
+        df["Certifications"].fillna("") + " " +
+        df["Job Role"].fillna("")
+    )
 
-if st.button("Analyze Resumes") and jd_text and uploaded_files:
-    resumes_text = [extract_text_from_pdf(file) for file in uploaded_files]
-    
-    # Combine JD and Resumes for Vectorization
-    all_content = [jd_text] + resumes_text
-    
-    # NLP: TF-IDF Vectorization
-    vectorizer = TfidfVectorizer(stop_words='english')
-    matrix = vectorizer.fit_transform(all_content)
-    
-    # Calculate Cosine Similarity
-    scores = cosine_similarity(matrix[0:1], matrix[1:]).flatten()
-    
-    # Display Results
-    st.subheader("Results")
-    for i, score in enumerate(scores):
-        st.write(f"**{uploaded_files[i].name}**: Match Score: {round(score * 100, 2)}%")
-        st.progress(float(score))
+    X = df["resume_text"]
+    y = df["Recruiter Decision"]
+
+    vectorizer = TfidfVectorizer(
+        stop_words="english",
+        max_features=4000
+    )
+    X_vec = vectorizer.fit_transform(X)
+
+    model = LogisticRegression(max_iter=1000)
+    model.fit(X_vec, y)
+
+    joblib.dump(model, MODEL_PATH)
+    joblib.dump(vectorizer, VECTORIZER_PATH)
+
+    return model, vectorizer
+
+# ---------------- LOAD MODEL ----------------
+def load_model():
+    if not os.path.exists(MODEL_PATH) or not os.path.exists(VECTORIZER_PATH):
+        return train_model()
+
+    model = joblib.load(MODEL_PATH)
+    vectorizer = joblib.load(VECTORIZER_PATH)
+    return model, vectorizer
+
+model, vectorizer = load_model()
+
+# ---------------- USER INPUT ----------------
+st.markdown("### 🔍 Enter Candidate Details")
+
+skills = st.text_input("Skills (comma separated)")
+education = st.selectbox(
+    "Education",
+    ["B.Sc", "B.Tech", "MBA", "M.Sc", "PhD"]
+)
+certifications = st.text_input("Certifications")
+job_role = st.text_input("Job Role Applied For")
+
+# ---------------- PREDICTION ----------------
+if st.button("🚀 Screen Resume"):
+
+    resume_text = (
+        skills + " " +
+        education + " " +
+        certifications + " " +
+        job_role
+    )
+
+    X = vectorizer.transform([resume_text])
+    prediction = model.predict(X)[0]
+    confidence = max(model.predict_proba(X)[0]) * 100
+
+    st.markdown(f"## ✅ Decision: **{prediction}**")
+    st.markdown(f"### 📊 Confidence Score: **{confidence:.2f}%**")
+
+    if prediction == "Hire":
+        st.success("Candidate is suitable for the role 🎯")
+    else:
+        st.error("Candidate does not meet the criteria ❌")
