@@ -86,7 +86,7 @@ if st.button("🚀 Screen Resume"):
         job_role
     )
 
-    X = vectorizer.transform([resume_text])
+
     
     confidence = max(model.predict_proba(X)[0]) * 100
 
