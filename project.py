@@ -88,7 +88,7 @@ if st.button("🚀 Screen Resume"):
 
 
 
-    if prediction == "Hire":
+    
         st.success("Candidate is suitable for the role 🎯")
     else:
         st.error("Candidate does not meet the criteria ❌")
