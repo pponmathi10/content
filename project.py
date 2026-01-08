@@ -27,7 +27,7 @@ VECTORIZER_PATH = "vectorizer.pkl"
 
 # ---------------- TRAIN MODEL ----------------
 def train_model():
-    df = pd.read_csv(DATA_PATH)
+    
 
     # Combine text columns
     df["resume_text"] = (
@@ -57,13 +57,13 @@ def train_model():
 # ---------------- LOAD MODEL ----------------
 def load_model():
     if not os.path.exists(MODEL_PATH) or not os.path.exists(VECTORIZER_PATH):
-        return train_model()
+        
 
     model = joblib.load(MODEL_PATH)
     vectorizer = joblib.load(VECTORIZER_PATH)
     return model, vectorizer
 
-model, vectorizer = load_model()
+
 
 # ---------------- USER INPUT ----------------
 st.markdown("### 🔍 Enter Candidate Details")
