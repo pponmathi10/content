@@ -8,7 +8,6 @@ Original file is located at
 """
 import streamlit as st
 
-import PyPDF2
 
 def extract_text_from_pdf(file):
     pdf_reader = PyPDF2.PdfReader(file)
